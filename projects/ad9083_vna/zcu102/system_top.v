@@ -56,17 +56,17 @@ module system_top (
 
   output                  pwdn,
   output                  rstb,
-  output                  refsel,
 
   inout                   spi_sdio,
   output                  spi_csn_clk,
   output                  spi_csn_adc,
   output                  spi_clk,
+  output                  adc_lvsft_en,
+  output                  clkd_lvsft_en,
 
   output                  spi_bus0_sck,
   output                  spi_bus0_sdi,
   input                   spi_bus0_sdo,
-  output                  spi_bus0_csn_f1,
   output                  spi_bus0_csn_f2,
   output                  spi_bus0_csn_sen,
 
@@ -183,7 +183,6 @@ module system_top (
   assign gpio_sw1 = gpio_o[37];
   assign gpio_sw0 = gpio_o[36];
   assign adl5960x_sync1 = gpio_o[35];
-  assign refsel = gpio_o[34];
   assign rstb = gpio_o[33];
   assign pwdn = gpio_o[32];
 
@@ -221,6 +220,9 @@ module system_top (
     .spi_miso(spi_miso),
     .spi_sdio(spi_sdio),
     .spi_dir());
+
+  assign adc_lvsft_en  = spi_csn_adc;
+  assign clkd_lvsft_en = spi_csn_clk;
 
   ad_3w_spi #(
     .NUM_OF_SLAVES(4))

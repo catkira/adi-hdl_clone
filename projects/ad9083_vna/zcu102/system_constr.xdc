@@ -23,7 +23,8 @@ set_property  -dict {PACKAGE_PIN  AC4 IOSTANDARD LVCMOS18}   [get_ports spi_sdio
 
 set_property  -dict {PACKAGE_PIN  V1  IOSTANDARD LVCMOS18}   [get_ports pwdn]              ; ## H8  FMC_HPC0_LA02_N
 set_property  -dict {PACKAGE_PIN  U5  IOSTANDARD LVCMOS18}   [get_ports rstb]              ; ## H13 FMC_HPC0_LA07_P
-set_property  -dict {PACKAGE_PIN  Y2  IOSTANDARD LVCMOS18}   [get_ports refsel]            ; ## G9  FMC_HPC0_LA03_P
+set_property  -dict {PACKAGE_PIN  Y2  IOSTANDARD LVCMOS18}   [get_ports adc_lvsft_en]      ; ## G9  FMC_HPC0_LA03_P
+set_property  -dict {PULLTYPE PULLUP} [get_ports adc_lvsft_en]
 
 set_property  -dict {PACKAGE_PIN  AA2 IOSTANDARD LVDS}       [get_ports rx_sync_p]         ; ## H10 FMC_HPC0_LA04_P
 set_property  -dict {PACKAGE_PIN  AA1 IOSTANDARD LVDS}       [get_ports rx_sync_n]         ; ## H11 FMC_HPC0_LA04_N
@@ -63,7 +64,9 @@ set_property  -dict {PACKAGE_PIN  N11  IOSTANDARD LVCMOS18} [get_ports adl5960x_
 set_property  -dict {PACKAGE_PIN  Y12  IOSTANDARD LVCMOS18} [get_ports spi_bus0_sck]       ; ## G18 FMC_HPC0_LA16_P
 set_property  -dict {PACKAGE_PIN  W7   IOSTANDARD LVCMOS18} [get_ports spi_bus0_sdi]       ; ## G15 FMC_HPC0_LA12_P
 set_property  -dict {PACKAGE_PIN  W6   IOSTANDARD LVCMOS18} [get_ports spi_bus0_sdo]       ; ## G16 FMC_HPC0_LA12_N
-set_property  -dict {PACKAGE_PIN  AA12 IOSTANDARD LVCMOS18} [get_ports spi_bus0_csn_f1]    ; ## G19 FMC_HPC0_LA16_N
+set_property  -dict {PACKAGE_PIN  AA12 IOSTANDARD LVCMOS18} [get_ports clkd_lvsft_en]      ; ## G19 FMC_HPC0_LA16_N
+set_property  -dict {PULLTYPE PULLUP} [get_ports clkd_lvsft_en]
+
 set_property  -dict {PACKAGE_PIN  N13  IOSTANDARD LVCMOS18} [get_ports spi_bus0_csn_f2]    ; ## G21 FMC_HPC0_LA20_P
 set_property  -dict {PACKAGE_PIN  M13  IOSTANDARD LVCMOS18} [get_ports spi_bus0_csn_sen]   ; ## G22 FMC_HPC0_LA20_N
 
