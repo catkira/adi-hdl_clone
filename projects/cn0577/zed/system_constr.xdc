@@ -18,31 +18,43 @@ set_property -dict {PACKAGE_PIN J20 IOSTANDARD LVCMOS25} [get_ports pd_cntrl]; #
 set_property -dict {PACKAGE_PIN G20 IOSTANDARD LVCMOS25} [get_ports testpat_cntrl]; #G21  FMC_LPC_LA20_P
 set_property -dict {PACKAGE_PIN G19 IOSTANDARD LVCMOS25} [get_ports twolanes_cntrl]; #G24  FMC_LPC_LA22_P
 
+# differential propagation delay for ref_clk
+set tref_early 0.3
+set tref_late  1.5
+
+# 120MHz clock
+set clk_period 8.333
+# level translator propagation delay of 0.225ns
+# 8.333/2 + 0.225 = 4.3915 ~= 4.392
+
 # clocks
 
-create_clock -period 8.333 -name dco [get_ports dco_p]
-create_clock -period 8.333 -name ref_clk [get_ports ref_clk_p]
-create_clock -period 8.333 -name virtual_clk -waveform {0.225 4.392}
+create_clock -period $clk_period -name dco [get_ports dco_p]
+create_clock -period $clk_period -name ref_clk [get_ports ref_clk_p]
+create_clock -period $clk_period -name virt_clk -waveform {0.225 4.392}
 
-set_clock_latency -source -early 0.3 [get_clocks ref_clk]
-set_clock_latency -source -late  1.5 [get_clocks ref_clk]
+# minimum source latency value
+set_clock_latency -source -early $tref_early [get_clocks ref_clk]
+# maximum source latency value
+set_clock_latency -source -late  $tref_late  [get_clocks ref_clk]
 
-############ MUST be cnv_en, but then the timing fails with slack of -4.979ns
-set_output_delay -clock dco -max 1.4 [get_ports cnv]
-set_output_delay -clock dco -min 0.3 [get_ports cnv]
+set_input_delay -clock dco -max 0.200 [get_ports da_p]
+set_input_delay -clock dco -min -0.200 [get_ports da_p]
+set_input_delay -clock dco -clock_fall -max -add_delay 0.200 [get_ports da_p]
+set_input_delay -clock dco -clock_fall -min -add_delay -0.200 [get_ports da_p]
 
-set_multicycle_path 2 -setup -end   -from dco -to ref_clk
-set_multicycle_path 1 -hold  -start -from dco -to ref_clk
+set_input_delay -clock dco -max 0.200 [get_ports db_p]
+set_input_delay -clock dco -min -0.200 [get_ports db_p]
+set_input_delay -clock dco -clock_fall -max -add_delay 0.200 [get_ports db_p]
+set_input_delay -clock dco -clock_fall -min -add_delay -0.200 [get_ports db_p]
 
-set_input_delay -clock dco -max 0.2 [get_ports da_p];
-set_input_delay -clock dco -min -0.2 [get_ports da_p];
-set_input_delay -clock dco -max 0.2 [get_ports da_p] -clock_fall -add_delay;
-set_input_delay -clock dco -min -0.2 [get_ports da_p] -clock_fall -add_delay;
+set_output_delay -clock [get_clocks virt_clk] -min [expr -($clk_period + 4.1 - 0.3)] [get_ports cnv_en]
+set_output_delay -clock [get_clocks virt_clk] -max [expr -($clk_period + 4.1 - 1.4)] [get_ports cnv_en]
 
-set_input_delay -clock dco -max 0.2 [get_ports db_p];
-set_input_delay -clock dco -min -0.2 [get_ports db_p];
-set_input_delay -clock dco -max 0.2 [get_ports db_p] -clock_fall -add_delay;
-set_input_delay -clock dco -min -0.2 [get_ports db_p] -clock_fall -add_delay;
+set_clock_groups -name async_dco_ref_clk -asynchronous -group [get_clocks dco] -group [get_clocks ref_clk]
+
+#set_multicycle_path 2 -setup -end   -from dco -to ref_clk
+#set_multicycle_path 1 -hold  -start -from dco -to ref_clk
 
 set_property IDELAY_VALUE 27 [get_cells i_system_wrapper/system_i/axi_ltc2387/inst/i_if/i_rx_db/i_rx_data_idelay]
 set_property IDELAY_VALUE 27 [get_cells i_system_wrapper/system_i/axi_ltc2387/inst/i_if/i_rx_da/i_rx_data_idelay]
