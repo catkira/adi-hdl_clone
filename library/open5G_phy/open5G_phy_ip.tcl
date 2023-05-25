@@ -7,10 +7,10 @@ global VIVADO_IP_LIBRARY
 
 exec -ignorestderr python3 -m pip install -U --user pip
 exec -ignorestderr python3 -m pip install --user --no-deps py3gpp
-exec python3 ../../submodules/open5G_rx/tools/generate_FFT_demod_tap_file.py --NFFT=8 --CP_LEN=18 --CP_ADVANCE=9 --OUT_DW=16
-exec python3 ../../submodules/open5G_rx/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=0
-exec python3 ../../submodules/open5G_rx/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=1
-exec python3 ../../submodules/open5G_rx/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=2
+exec python3 ../../submodules/open5G_phy/tools/generate_FFT_demod_tap_file.py --NFFT=8 --CP_LEN=18 --CP_ADVANCE=9 --OUT_DW=16
+exec python3 ../../submodules/open5G_phy/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=0
+exec python3 ../../submodules/open5G_phy/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=1
+exec python3 ../../submodules/open5G_phy/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=2
 
 adi_ip_create open5G_phy
 set_property part xc7z010clg400-1 [current_project]
@@ -83,10 +83,10 @@ update_compile_order -fileset sources_1
 adi_ip_properties_lite open5G_phy
 set_property vendor_display_name Catkira [ipx::current_core]
 set_property vendor Catkira [ipx::current_core]
-set_property company_url http://www.github.com/catkira/open5G_rx [ipx::current_core]
+set_property company_url http://www.github.com/catkira/open5G_phy [ipx::current_core]
 set_property display_name "Open5G_phy" [ipx::current_core]
 set_property description "Open5G PHY" [ipx::current_core]
-adi_ip_ttcl open5G_rx "open5G_rx_constr.ttcl"
+adi_ip_ttcl open5G_phy "open5G_phy_constr.ttcl"
 
 set project_dir [get_property DIRECTORY [current_project]]/
 set_property value $project_dir [ipx::get_user_parameters TAP_FILE_PATH -of_objects [ipx::current_core]]
