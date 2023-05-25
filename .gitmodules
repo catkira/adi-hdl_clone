@@ -1,3 +1,3 @@
-[submodule "submodules/open5G_rx"]
+[submodule "submodules/open5G_phy"]
 	path = submodules/open5G_phy
 	url = https://github.com/catkira/open5G_phy.git
