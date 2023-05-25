@@ -130,6 +130,8 @@ clean:
 
 	$(MAKE) -C interfaces clean
 
+	$(MAKE) -C open5G_phy clean
+
 
 clean-all:clean
 
@@ -251,6 +253,8 @@ lib:
 	$(MAKE) -C xilinx/util_clkdiv
 
 	$(MAKE) -C interfaces
+
+	$(MAKE) -C open5G_phy
 
 ####################################################################################
 ####################################################################################
