@@ -75,7 +75,8 @@ add_files -norecurse -scan_for_includes -fileset $proj_fileset [list \
   "hdl/axil_interconnect_wrap_1x4.v" \
   "hdl/verilog-axi/axil_interconnect.v" \
   "hdl/verilog-axi/arbiter.v" \
-  "hdl/verilog-axi/priority_encoder.v"]
+  "hdl/verilog-axi/priority_encoder.v" \
+  "hdl/BWP_extractor.sv"]
 
 set_property top receiver $proj_fileset
 update_compile_order -fileset sources_1
