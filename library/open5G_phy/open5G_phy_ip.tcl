@@ -5,13 +5,6 @@ source $ad_hdl_dir/library/scripts/adi_ip_xilinx.tcl
 
 global VIVADO_IP_LIBRARY
 
-exec -ignorestderr python3 -m pip install -U --user pip
-exec -ignorestderr python3 -m pip install --user --no-deps py3gpp
-exec python3 ../../submodules/open5G_phy/tools/generate_FFT_demod_tap_file.py --NFFT=8 --CP_LEN=18 --CP_ADVANCE=9 --OUT_DW=16
-exec python3 ../../submodules/open5G_phy/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=0
-exec python3 ../../submodules/open5G_phy/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=1
-exec python3 ../../submodules/open5G_phy/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=2
-
 adi_ip_create open5G_phy
 set_property part xc7z010clg400-1 [current_project]
 set proj_fileset [get_filesets sources_1]
@@ -143,3 +136,13 @@ adi_add_bus_clock "clk_i" "m_axis_out:s_axi_if" "reset_n"
 
 ipx::create_xgui_files [ipx::current_core]
 ipx::save_core [ipx::current_core]
+
+exec -ignorestderr python3 -m pip install -U --user pip
+exec -ignorestderr python3 -m pip install --user --no-deps py3gpp
+exec python3 ../../submodules/open5G_phy/tools/generate_FFT_demod_tap_file.py --NFFT=8 --CP_LEN=18 --CP_ADVANCE=0 --OUT_DW=16
+exec python3 ../../submodules/open5G_phy/tools/generate_FFT_demod_tap_file.py --NFFT=8 --CP_LEN=18 --CP_ADVANCE=9 --OUT_DW=16
+exec python3 ../../submodules/open5G_phy/tools/generate_FFT_demod_tap_file.py --NFFT=9 --CP_LEN=36 --CP_ADVANCE=0 --OUT_DW=16
+exec python3 ../../submodules/open5G_phy/tools/generate_FFT_demod_tap_file.py --NFFT=9 --CP_LEN=36 --CP_ADVANCE=18 --OUT_DW=16
+exec python3 ../../submodules/open5G_phy/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=0
+exec python3 ../../submodules/open5G_phy/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=1
+exec python3 ../../submodules/open5G_phy/tools/generate_PSS_tap_file.py --PSS_LEN=128 --TAP_DW=32 --N_id_2=2

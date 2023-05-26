@@ -234,6 +234,7 @@ ad_ip_instance util_cpack2 cpack
 # open5G_phy
 ad_ip_instance open5G_phy open5G_phy
 ad_ip_parameter open5G_phy CONFIG.MULT_REUSE 32
+ad_ip_parameter open5G_phy CONFIG.MULT_REUSE_FFT 4
 ad_ip_parameter open5G_phy CONFIG.SEPARATE_IQ_IN 1
 ad_ip_parameter open5G_phy CONFIG.NFFT 9
 ad_ip_parameter open5G_phy CONFIG.CLK_FREQ 100000000
