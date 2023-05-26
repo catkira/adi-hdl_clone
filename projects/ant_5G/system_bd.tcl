@@ -235,10 +235,14 @@ ad_ip_instance util_cpack2 cpack
 ad_ip_instance open5G_phy open5G_phy
 ad_ip_parameter open5G_phy CONFIG.MULT_REUSE 32
 ad_ip_parameter open5G_phy CONFIG.SEPARATE_IQ_IN 1
-ad_ip_parameter open5G_phy CONFIG.NFFT 8
+ad_ip_parameter open5G_phy CONFIG.NFFT 9
 ad_ip_parameter open5G_phy CONFIG.CLK_FREQ 100000000
 ad_ip_parameter open5G_phy CONFIG.USE_TAP_FILE 1
 ad_ip_parameter open5G_phy CONFIG.HALF_CP_ADVANCE 1
+ad_ip_parameter open5G_phy CONFIG.VARIABLE_DETECTION_FACTOR 1
+ad_ip_parameter open5G_phy CONFIG.VARIABLE_NOISE_LIMIT 1
+ad_ip_parameter open5G_phy CONFIG.INITIAL_CFO_MODE 1
+ad_ip_parameter open5G_phy CONFIG.WINDOW_LEN 8
 
 ad_ip_instance axi_dmac open5G_phy_dma
 ad_ip_parameter open5G_phy_dma CONFIG.DMA_TYPE_SRC 1
