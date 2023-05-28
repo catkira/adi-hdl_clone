@@ -28,7 +28,7 @@ add_files -norecurse -scan_for_includes -fileset $proj_fileset [list \
   "hdl/PSS_correlator_mr.sv" \
   "hdl/PSS_detector.sv" \
   "hdl/PSS_detector_regmap.sv" \
-  "hdl/ressource_grid_subscriber.sv" \
+  "hdl/ressource_grid_framer.sv" \
   "hdl/SSS_detector.sv" \
   "hdl/axis_axil_fifo.sv" \
   "hdl/FFT_demod.sv" \
